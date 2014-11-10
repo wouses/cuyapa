@@ -1,0 +1,14 @@
+
+
+1) PROBLEMA AL QUITAR EL INDEX.PHP DE LA DIRECCION ES NECESARIO MODIFICAR ALGUNAS COSAS PARA QUE FUNCIONE
+
+1. Directorio de Trabajo: /www/cuyapa
+2. Mover allí el Archivo: '.htaccess' junto al archivo index.php de la aplicacion: 'cuyapa'
+3. Editar el Archivo: 'config.php' que se encuentra en: '/cuyapa/application/config' y dejar la linea así: $config['index_page'] = '';
+4. Editar el Archivo: 'httpd.conf' que se encuentra en el directorio de instalacion del Servidor Apache, allí quitar el comentario a la linea:
+'#LoadModule rewrite_module modules/mod_rewrite.so' guardar y reiniciar el Servidor Apache
+5. Editar el Archivo: '.htaccess' con el siguiente contenido:
+RewriteEngine on
+RewriteCond $1 !^(index.php|css|js|images|robots.txt)
+RewriteRule ^(.*)$ /cuyapa/index.php/$1 [L]
+6. Probar y Listo (así me funcionó)
